@@ -1,15 +1,70 @@
 # AGENTS.md
 
-This project analyses ESG factors in corporate annual reports 
-for 30 major banks using NLP and LLMs.
+This file documents how AI agents — specifically Claude Code — were used during development of the ESG Insight project.
 
-## How to run
-1. Install dependencies: `pip install -r requirements.txt`
-2. Add your Google API key to a `.env` file as GOOGLE_API_KEY
-3. Run the scraper: `python scraper.py`
-4. Run the dashboard: `streamlit run dashboard/app.py`
+---
 
-## Tasks an AI agent can help with
-- Writing new ESG scoring categories in `src/scoring.py`
-- Writing tests in `tests/`
-- Improving code documentation
+## Project overview
+
+ESG Insight analyses Environmental, Social, and Governance (ESG) factors in 10-K SEC filings for 28 major US financial-sector companies using NLP and LLMs (Google Gemini 2.5 Flash). The pipeline scrapes EDGAR, stores data in PostgreSQL, scores each company on E/S/G pillars, and presents results in a Streamlit dashboard.
+
+---
+
+## How Claude Code was used
+
+### Documentation
+
+**PR: [docs: add ESG Insight user guide](https://github.com/bianca-24/Final-Project/pull/new/docs/user-guide)**
+Branch: `docs/user-guide`
+
+Claude Code read the full codebase — `Dashboard.py`, all notebooks, `.env.example`, and `requirements.txt` — then authored `docs/user-guide.md`, a comprehensive end-user guide covering:
+
+- Prerequisites and installation
+- All dashboard sections (score cards, radar chart, industry comparison, rankings, evidence quotes)
+- The scoring grade system and colour thresholds
+- All 28 covered companies and their sectors
+- A troubleshooting table for common errors
+
+Claude Code also created the branch (`docs/user-guide`), committed the file, pushed to origin, and opened the pull request on GitHub.
+
+### README and AGENTS.md
+
+Claude Code updated `README.md` from a single-line placeholder to a full project overview including:
+- End-to-end pipeline diagram
+- Company coverage table by sector
+- Installation and step-by-step usage instructions for all four pipeline stages
+- Dashboard feature list
+- Local and Streamlit Community Cloud deployment guide
+- Project directory structure
+
+`AGENTS.md` (this file) was also rewritten to accurately reflect the current codebase and Claude Code usage.
+
+---
+
+## Tasks well-suited for AI agents in this project
+
+- **Adding new ESG scoring sub-categories** — extend the `pillar_definitions` dict in `scoring.ipynb` with new GRI/SASB criteria and add the corresponding keywords to the chunk filter
+- **Writing database migration scripts** — adding columns or indexes to the `esg_scores` or `companies` tables
+- **Extending company coverage** — adding new CIK entries to `COMPANY_CIKS` in `main.ipynb` and the `companies` list in `database_setup.ipynb`
+- **Dashboard enhancements** — new chart types or filter controls in `Dashboard.py`
+- **Writing tests** — unit tests for the chunker (`is_xbrl_noise`, `chunk_text`) and the scoring prompt logic
+
+---
+
+## Running the project
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Set credentials
+cp .env.example .env   # then fill in DB_* and GOOGLE_API_KEY
+
+# Run pipeline
+# 1. main.ipynb          — scrape EDGAR and save chunks
+# 2. database_setup.ipynb — create schema and load chunks
+# 3. scoring.ipynb        — score all companies with Gemini
+
+# Launch dashboard
+streamlit run Dashboard.py
+```
