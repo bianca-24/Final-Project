@@ -12,21 +12,6 @@ ESG Insight analyses Environmental, Social, and Governance (ESG) factors in 10-K
 
 ## How Claude Code was used
 
-### Documentation
-
-**PR: [docs: add ESG Insight user guide](https://github.com/bianca-24/Final-Project/pull/new/docs/user-guide)**
-Branch: `docs/user-guide`
-
-Claude Code read the full codebase — `Dashboard.py`, all notebooks, `.env.example`, and `requirements.txt` — then authored `docs/user-guide.md`, a comprehensive end-user guide covering:
-
-- Prerequisites and installation
-- All dashboard sections (score cards, radar chart, industry comparison, rankings, evidence quotes)
-- The scoring grade system and colour thresholds
-- All 28 covered companies and their sectors
-- A troubleshooting table for common errors
-
-Claude Code also created the branch (`docs/user-guide`), committed the file, pushed to origin, and opened the pull request on GitHub.
-
 ### README and AGENTS.md
 
 Claude Code updated `README.md` from a single-line placeholder to a full project overview including:
