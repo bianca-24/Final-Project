@@ -24,6 +24,10 @@ Claude Code updated `README.md` from a single-line placeholder to a full project
 
 `AGENTS.md` (this file) was also rewritten to accurately reflect the current codebase and Claude Code usage.
 
+### What Claude Code does not handle
+
+The **user guide** (`user_guide.md`) is written and maintained by the project team, not by Claude Code.
+
 ---
 
 ## Tasks well-suited for AI agents in this project
